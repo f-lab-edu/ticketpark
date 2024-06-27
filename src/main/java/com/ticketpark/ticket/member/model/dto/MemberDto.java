@@ -1,8 +1,10 @@
 package com.ticketpark.ticket.member.model.dto;
 
 import com.ticketpark.ticket.member.model.entity.Member;
-import com.ticketpark.ticket.member.model.entity.MemberRole;
+import com.ticketpark.ticket.member.model.entity.Role;
 import com.ticketpark.ticket.member.model.entity.MemberStatus;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,30 +15,30 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class MemberDto {
-
+    @NotBlank
     private String id;
-    private MemberRole role;
+    private Role role;
+    @NotBlank
     private String password;
+    @Email
     private String email;
     private String hp_no;
     private Timestamp created_dt;
-    private Timestamp update_dt;
+    private Timestamp updated_dt;
     private MemberStatus use_yn;
-
-    public MemberDto(String id,String password) {
-        this.id = id;
-        this.role = role;
-        this.password = password;
-        this.email = email;
-        this.hp_no = hp_no;
-    }
 
     public static MemberDto fromEntity(Member entity) {
         return new MemberDto(
                 entity.getId(),
-                entity.getPassword()
-
+                entity.getRole(),
+                entity.getPassword(),
+                entity.getEmail(),
+                entity.getHp_no(),
+                entity.getCreated_dt(),
+                entity.getUpdated_dt(),
+                entity.getUse_yn()
         );
     }
 }

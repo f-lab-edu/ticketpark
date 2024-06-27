@@ -1,18 +1,17 @@
 package com.ticketpark.ticket.member.controller.response;
 
-import com.ticketpark.ticket.member.model.dto.MemberDto;
+import com.ticketpark.ticket.member.model.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 public class MemberJoinResponse {
     private String id;
 
-    public static MemberJoinResponse fromMemberDto(MemberDto dto){
+    public static MemberJoinResponse fromMember(Member member){
         return new MemberJoinResponse(
-                dto.getId()
+                member.getId()
         );
     }
 

@@ -4,10 +4,12 @@ import com.ticketpark.ticket.member.model.entity.Member;
 
 import java.util.Optional;
 
-public interface IMemberRepository {
+public interface MemberRepository {
 
     //회원가입
-    public Member addMember(Member member);
+    void addMember(Member member);
     //회원 조회
-    public Optional<Member> findById(String id);
+    Optional<Member> findById(String id);
+
+    int deleteMember(String id);
 }

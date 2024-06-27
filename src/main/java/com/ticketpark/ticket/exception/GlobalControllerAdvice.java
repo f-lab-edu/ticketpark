@@ -12,9 +12,9 @@ public class GlobalControllerAdvice {
 
     @ExceptionHandler(TicketParkException.class)
     public ResponseEntity<?> errorHandler(TicketParkException e) {
-        log.error("에러 발생 {}", e.toString());
+        log.error("Error occurs {}", e.toString());
 
-        return ResponseEntity.status(e.getErrorCode().getStatus())
+        return ResponseEntity.status(e.getErrorCode().getStatus().getHttpCode())
                 .body(Response.error(e.getErrorCode().name()));
     }
 }

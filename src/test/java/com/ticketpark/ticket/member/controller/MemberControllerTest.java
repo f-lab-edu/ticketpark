@@ -1,5 +1,6 @@
 package com.ticketpark.ticket.member.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ticketpark.ticket.member.controller.request.MemberJoinRequest;
 import com.ticketpark.ticket.member.model.dto.MemberDto;
@@ -10,6 +11,7 @@ import com.ticketpark.ticket.member.repository.MemberRepository;
 import com.ticketpark.ticket.member.service.MemberService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,10 +35,10 @@ public class MemberControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Mock
+    @MockBean
     private MemberService memberService;
 
-    @Autowired
+    @MockBean
     private MemberRepository memberRepository;
 
     @Autowired
@@ -56,19 +59,28 @@ public class MemberControllerTest {
     }
 
     @Test
-    void 회원가입() throws Exception {
+    @DisplayName("회원가입 request 유효성 체크")
+    void validateMemberJoinRequest() throws Exception {
+        request.setId("");
+        request.setPassword("");
+        request.setRole(null);
+        request.setEmail("abc@@.com");
 
-        //TODO @MockBean 오류 왜 나는지 파악 필요함
-        when(memberService.join(request.fromJoinRequest(request))).thenReturn(mock(Member.class));
+        when(memberService.join(any())).thenReturn(mock(Member.class));
+        mvc.perform(post("/api/member/join").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(request))).andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
+
+    @Test
+    @DisplayName("회원가입")
+    void joinMember() throws Exception {
+        when(memberService.join(any())).thenReturn(mock(Member.class));
         mvc.perform(post("/api/member/join").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(request))).andDo(print())
                 .andExpect(status().isOk());
     }
 
-    @AfterEach
-    void afterEach() {
-        //기존 데이터 제거
-        //TODO @Mock이면 여기 제대로 실행 안됨
-        memberRepository.deleteMember(request.getId());
-    }
+
 }

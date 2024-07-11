@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ticketpark.ticket.member.repository.MemberMapper">
+<mapper namespace="com.ticketpark.member.repository.MemberMapper">
 
-    <select id="findById" resultType="com.ticketpark.ticket.member.model.entity.Member">
+    <select id="findById" resultType="com.ticketpark.member.model.entity.Member">
         select member_id, id, role, email, hp_no, created_dt, updated_dt, use_yn
         from member
         where id = #{id} and use_yn = 'Y'

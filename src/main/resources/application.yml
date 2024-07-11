@@ -1,20 +1,22 @@
+application:
+  name: ticket
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     url: jdbc:mariadb://localhost:3306/sklee
     password: 1q2w3e4r
-  application:
-    name: ticket
+  sql:
+    init:
+      mode: never
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: 'true'
-  type-handlers-package: com.ticketpark.ticket.member.model.typeHandler
+  type-handlers-package: com.ticketpark.configuration.mybatis.typeHandler
 logging:
   level:
     com:
       ticketpark:
-        ticket:
           mybatis: trace
 

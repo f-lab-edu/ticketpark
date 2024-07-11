@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ticketpark.performance.repository.PerformanceMapper">
+    <insert id = "createPerformance" useGeneratedKeys="true" keyColumn="performance_id" keyProperty="performance_id" >
+        insert into performance (genre, name, place, start_dt, end_dt, created_at)
+        values(#{performance.genre}, #{performance.name}, #{performance.place}, #{performance.start_dt}, #{performance.end_dt}, #{performance.created_at})
+    </insert>
+</mapper>

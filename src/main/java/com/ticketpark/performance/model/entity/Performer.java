@@ -15,17 +15,17 @@ public class Performer {
     private String name;
     private Long performance_id;
 
-    public static List<Performer> getPerformerList(PerformanceCreateRequest request){
-        List<Performer> result = new ArrayList<Performer>();
+    public static List<Performer> getPerformerList(Long performanceId, PerformanceCreateRequest request){
+        List<Performer> list = new ArrayList<Performer>();
         List<PerformerDto> requestList = request.getPerformer();
 
         for (PerformerDto dto : requestList) {
             Performer performer = new Performer();
             performer.setName(dto.getName());
-            performer.setPerformance_id(request.getPerformance_id());
-            result.add(performer);
+            performer.setPerformance_id(performanceId);
+            list.add(performer);
         }
-        return result;
+        return list;
     }
 
 

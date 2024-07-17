@@ -7,8 +7,8 @@
         insert into performer (name, performance_id) values
         <foreach collection="list" index = "index" item = "performer" separator=",">
             (
-            #{performer.name},
-            #{performer.performance_id}
+                #{performer.name}
+               ,#{performer.performance_id}
             )
         </foreach>
     </insert>

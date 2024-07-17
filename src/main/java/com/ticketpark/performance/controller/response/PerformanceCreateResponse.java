@@ -1,22 +1,14 @@
-package com.ticketpark.performance.controller.request;
+package com.ticketpark.performance.controller.response;
 
-import com.ticketpark.performance.model.dto.PerformanceCreateDto;
 import com.ticketpark.performance.model.dto.PerformanceDto;
 import com.ticketpark.performance.model.dto.PerformerDto;
-import com.ticketpark.performance.model.entity.Genre;
 import com.ticketpark.ticket.model.dto.TicketDto;
 import com.ticketpark.ticket.model.dto.TicketGradeDto;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
-public class PerformanceCreateRequest {
+public class PerformanceCreateResponse {
     //공연정보
     @NotNull
     private PerformanceDto performance;

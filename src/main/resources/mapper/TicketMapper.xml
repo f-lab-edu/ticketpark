@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ticketpark.ticket.repository.TicketMapper">
+    <insert id = "createTicket" useGeneratedKeys="true" keyColumn="ticket_id" keyProperty="ticket_id" >
+        insert into ticket (start_dt, end_dt, created_dt, performance_id)
+        values(#{ticket.start_dt}, #{ticket.end_dt}, #{ticket.created_dt}, #{ticket.performance_id})
+    </insert>
+</mapper>

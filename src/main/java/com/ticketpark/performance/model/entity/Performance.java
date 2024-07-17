@@ -19,13 +19,16 @@ public class Performance {
     private LocalDateTime created_at;
 
     public static Performance of(PerformanceCreateRequest request) {
+        PerformanceDto dto = request.getPerformance();
+
         Performance performance = new Performance();
-        performance.setGenre(request.getGenre());
-        performance.setName(request.getName());
-        performance.setPlace(request.getPlace());
-        performance.setStart_dt(request.getStart_dt());
-        performance.setEnd_dt(request.getEnd_dt());
+        performance.setGenre(dto.getGenre());
+        performance.setName(dto.getName());
+        performance.setPlace(dto.getPlace());
+        performance.setStart_dt(dto.getStart_dt());
+        performance.setEnd_dt(dto.getEnd_dt());
         performance.setCreated_at(LocalDateTime.now());
+
         return performance;
     }
 }

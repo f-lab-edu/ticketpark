@@ -31,7 +31,7 @@ public class MemberServiceTest {
     void beforeEach() {
         //테스트 데이터 셋팅
         dto = new MemberDto();
-        dto.setId("idTest1");
+        dto.setId("idTest2");
         dto.setRole(Role.USER);
         dto.setPassword("1q2w3e4r");
         dto.setEmail("aa@aa.com");

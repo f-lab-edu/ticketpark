@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ticketpark.ticket.repository.TicketGradeMapper">
+    <insert id = "createTicketGrade" useGeneratedKeys="true" keyColumn="ticket_grade_id" keyProperty="ticket_grade_id">
+        insert into ticket_grade(grade, grade_name, seat_count, price, created_dt, ticket_id) values
+            <foreach collection="list" index="index" item="ticket_grade" separator=",">
+            (
+                 #{ticket_grade.grade}
+                ,#{ticket_grade.grade_name}
+                ,#{ticket_grade.seat_count}
+                ,#{ticket_grade.price}
+                ,#{ticket_grade.created_dt}
+                ,#{ticket_grade.ticket_id}
+            )
+        </foreach>
+    </insert>
+</mapper>

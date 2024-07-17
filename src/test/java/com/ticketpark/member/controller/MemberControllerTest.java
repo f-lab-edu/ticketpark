@@ -3,6 +3,7 @@ package com.ticketpark.member.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ticketpark.member.controller.request.MemberJoinRequest;
+import com.ticketpark.member.fixture.MemberFixture;
 import com.ticketpark.member.model.entity.Member;
 import com.ticketpark.member.model.entity.MemberStatus;
 import com.ticketpark.member.model.entity.Role;
@@ -47,14 +48,7 @@ public class MemberControllerTest {
 
     @BeforeEach
     void beforeEach() {
-        //초기 데이터 셋팅
-        request = new MemberJoinRequest();
-        request.setId("idTest1");
-        request.setRole(Role.USER);
-        request.setPassword("1q2w3e4r");
-        request.setEmail("aa@aa.com");
-        request.setHp_no("01012345678");
-        request.setUse_yn(MemberStatus.USE);
+        request = MemberFixture.getJoinRequest();
     }
 
     @Test

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ticketpark.ticket.member.repository.MemberMapper">
+
+    <select id="findById" resultType="com.ticketpark.ticket.member.model.entity.Member">
+        select member_sid, id, role, email, hp_no, created_dt, updated_dt, use_yn
+        from member
+        where id = #{id} and use_yn = 'Y'
+    </select>
+
+    <insert id = "addMember" useGeneratedKeys="true" keyColumn="member_sid" keyProperty="member_sid" >
+        insert into member (id, role, password, email, hp_no, created_dt)
+        values (#{member.id}, #{member.role}, #{member.password}, #{member.email}, #{member.hp_no}, #{member.created_dt})
+    </insert>
+
+    <delete id="deleteMember" parameterType="String">
+        delete from member where id = #{id}
+    </delete>
+
+
+</mapper>

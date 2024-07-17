@@ -10,14 +10,13 @@ import java.sql.Timestamp;
 @Setter
 public class Member {
     //회원 SID
-    //TODO 시간 날떄 UUID 변경 고려할 것..
     private Long member_sid;
     //아이디
     private String id;
-    //회원등급
-    private MemberRole role;
     //비밀번호
     private String password;
+    //회원등급
+    private Role role;
     //이메일
     private String email;
     //핸드폰 번호
@@ -29,13 +28,17 @@ public class Member {
     //회원 구분
     private MemberStatus use_yn;
 
-    public static Member of(MemberDto memberDto) {
+    public static Member of(MemberDto dto) {
         Member member = new Member();
-        member.setId(memberDto.getId());
-        member.setRole(memberDto.getRole());
-        member.setPassword(memberDto.getPassword());
-        member.setEmail(memberDto.getEmail());
-        member.setHp_no(memberDto.getHp_no());
+
+        member.setId(dto.getId());
+        member.setPassword(dto.getPassword());
+        member.setRole(dto.getRole());
+        member.setEmail(dto.getEmail());
+        member.setHp_no(dto.getHp_no());
+        member.setCreated_dt(dto.getCreated_dt());
+        member.setUpdated_dt(dto.getUpdated_dt());
+        member.setUse_yn(dto.getUse_yn());
 
         return member;
     }

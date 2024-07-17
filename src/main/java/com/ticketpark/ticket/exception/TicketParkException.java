@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 public class TicketParkException extends RuntimeException{
+
     private ErrorCode errorCode;
     private String message;
 

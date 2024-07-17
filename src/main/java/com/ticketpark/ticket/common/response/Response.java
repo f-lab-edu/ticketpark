@@ -1,11 +1,14 @@
 package com.ticketpark.ticket.common.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@Getter
+@RequiredArgsConstructor
 public class Response<T> {
-    private String resultCode;
-    private T result;
+    private final String resultCode;
+    private final T result;
 
     public static<T> Response<T> success(){
         return new Response<T>("SUCCESS", null);

@@ -7,7 +7,7 @@ CREATE TABLE `member` (
                           `email`     	varchar(100)	NULL	COMMENT '이메일 주소',
                           `hp_no`	        varchar(100)	NULL	COMMENT '핸드폰 번호',
                           `created_dt`	timestamp	NULL	DEFAULT NOW()	COMMENT '회원 생성일시',
-                          `updated_dt`	timestamp	NULL	DEFAULT NOW()	COMMENT '회원 수정일시',
+                          `updated_dt`	timestamp	NULL	COMMENT '회원 수정일시',
                           `use_yn`	    char(1)	NULL	DEFAULT 'Y'	COMMENT '회원 삭제 구분'
 );
 

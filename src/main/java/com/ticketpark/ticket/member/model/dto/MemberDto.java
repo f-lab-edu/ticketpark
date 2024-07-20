@@ -17,12 +17,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDto {
-    @NotBlank
     private String id;
     private Role role;
-    @NotBlank
     private String password;
-    @Email
     private String email;
     private String hp_no;
     private Timestamp created_dt;

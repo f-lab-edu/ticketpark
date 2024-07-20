@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Setter
 public class Member {
     //회원 SID
-    private Long member_sid;
+    private Long member_id;
     //아이디
     private String id;
     //비밀번호

@@ -43,11 +43,10 @@ public class MemberServiceTest {
     @Test
     void 회원가입_정상_동작(){
         //when
-        Member join = memberService.join(dto);
-        Optional<Member> memberById = memberRepository.findById(dto.getId());
-
+        Member joinedMember = memberService.join(dto);
+        Member searchedMember = memberRepository.findById(dto.getId()).orElseGet(Member::new);
         //then
-        assertThat(dto.getId()).isEqualTo(memberById.get().getId());
+        assertThat(joinedMember.getId()).isEqualTo(searchedMember.getId());
     }
 
     @Test

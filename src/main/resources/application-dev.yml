@@ -1,0 +1,15 @@
+spring:
+  docker:
+    compose:
+      file: docker-compose-dev.yml
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    type-handlers-package: com.ticketpark.configuration.mybatis.typeHandler
+logging:
+  level:
+    com:
+      ticketpark:
+        mybatis: trace
+

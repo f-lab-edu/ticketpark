@@ -11,9 +11,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class MemberJoinRequest {
     @NotBlank(message = "아이디는 입력하세요")
     private String id;
@@ -27,6 +24,16 @@ public class MemberJoinRequest {
     private LocalDateTime created_dt;
     private LocalDateTime updated_dt;
     private MemberStatus use_yn;
+
+    @Builder
+    public MemberJoinRequest(String id, Role role, String password, String email, String hp_no, MemberStatus use_yn){
+        this.id = id;
+        this.role = role;
+        this.password = password;
+        this.email = email;
+        this.hp_no = hp_no;
+        this.use_yn = use_yn;
+    }
 
     public MemberDto fromJoinRequest(MemberJoinRequest request){
         return new MemberDto(

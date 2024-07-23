@@ -36,7 +36,7 @@ public class GenreTypeHandler implements TypeHandler<Genre> {
     }
 
     private Genre getGenre(String genreKey){
-        Genre genre = null;
+        Genre genre = Genre.CONCERT;
         switch (genreKey){
             case "CO":
                 genre = Genre.CONCERT;

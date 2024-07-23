@@ -14,8 +14,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class MemberDto {
     private String id;

@@ -10,7 +10,7 @@
         where id = #{id} and use_yn = 'Y'
     </select>
 
-    <insert id = "addMember" useGeneratedKeys="true" keyColumn="member_sid" keyProperty="member_id" >
+    <insert id = "addMember" useGeneratedKeys="true" keyColumn="member_id" keyProperty="member_id" >
         insert into member (id, role, password, email, hp_no, created_dt)
         values (#{member.id}, #{member.role}, #{member.password}, #{member.email}, #{member.hp_no}, #{member.created_dt})
     </insert>

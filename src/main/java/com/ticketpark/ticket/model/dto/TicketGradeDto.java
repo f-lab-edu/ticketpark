@@ -1,5 +1,6 @@
 package com.ticketpark.ticket.model.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class TicketGradeDto {
     //티켓 테이블 pk
     private Long ticket_id;
 
+    @Builder
     public TicketGradeDto(String grade, String grade_name, Integer seat_count, Double price, LocalDateTime created_dt) {
         this.grade = grade;
         this.grade_name = grade_name;

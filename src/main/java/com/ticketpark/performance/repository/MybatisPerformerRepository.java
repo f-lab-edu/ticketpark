@@ -13,7 +13,7 @@ public class MybatisPerformerRepository implements PerformerRepository{
     private final PerformerMapper performerMapper;
 
     @Override
-    public void createPerformer(List<Performer> performerList) {
-        performerMapper.createPerformer(performerList);
+    public void createPerformer(List<Performer> performers) {
+        performerMapper.createPerformer(performers);
     }
 }

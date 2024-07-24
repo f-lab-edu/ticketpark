@@ -8,5 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface PerformerMapper {
-    void createPerformer(List<Performer> performerList);
+    void createPerformer(List<Performer> performers);
 }

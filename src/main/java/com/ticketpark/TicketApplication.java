@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@Import(RepositoryConfig.class)
 @SpringBootApplication
 public class TicketApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TicketApplication.class, args);
 	}

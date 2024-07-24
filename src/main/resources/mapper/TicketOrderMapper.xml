@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ticketpark.ticket.repository.TicketOrderMapper">
+    <insert id = "createTicketOrder" useGeneratedKeys="true" keyColumn="ticket_order_id" keyProperty="ticket_order_id" >
+        insert into ticket_order(member_id, performance_id, ticket_grade_id, order_serial_num, seat_info, created_dt)
+        values(
+               #{ticket_order.member_id}
+              , #{ticket_order.performance_id}
+              , #{ticket_order.ticket_grade_id}
+              , #{ticket_order.order_serial_num})
+              , #{ticket_order.seat_info})
+              , #{ticket_order.created_dt})
+    </insert>
+
+    <select id="getTickOrderBySeatInfo" resultType="com.ticketpark.ticket.model.entity.TicketOrder">
+        select
+            ticket_order_id
+            ,member_id
+            ,performance_id
+            ,ticket_grade_id
+            ,order_serial_num
+            ,seat_info
+            ,created_dt
+        from ticket_order
+        where performance_id = #{performance_id}
+            and ticket_grade_id = #{ticket_grade_id}
+            and seat_info = #{seat_info}
+    </select>
+</mapper>

@@ -16,4 +16,14 @@ public class MybatisTicketGradeRepository implements TicketGradeRepository{
     public void createTicketGrade(List<TicketGrade> ticketGradeList) {
         ticketGradeMapper.createTicketGrade(ticketGradeList);
     }
+
+    @Override
+    public int getCountTicketGrade(Long ticket_grade_id) {
+        return ticketGradeMapper.getCountTicketGrade(ticket_grade_id);
+    }
+
+    @Override
+    public int updateSeatCount(Long ticket_grade_id) {
+        return ticketGradeMapper.updateSeatCount(ticket_grade_id);
+    }
 }

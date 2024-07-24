@@ -5,6 +5,13 @@
 <mapper namespace="com.ticketpark.performance.repository.PerformanceMapper">
     <insert id = "createPerformance" useGeneratedKeys="true" keyColumn="performance_id" keyProperty="performance_id" >
         insert into performance (genre, name, place, start_dt, end_dt, created_at)
-        values(#{performance.genre}, #{performance.name}, #{performance.place}, #{performance.start_dt}, #{performance.end_dt}, #{performance.created_at})
+        values(
+               #{performance.genre}
+              , #{performance.name}
+              , #{performance.place}
+              , #{performance.start_dt}
+              , #{performance.end_dt}
+              , #{performance.created_at}
+              )
     </insert>
 </mapper>

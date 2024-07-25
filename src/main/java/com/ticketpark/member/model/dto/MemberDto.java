@@ -24,17 +24,4 @@ public class MemberDto {
     private LocalDateTime created_dt;
     private LocalDateTime updated_dt;
     private MemberStatus use_yn;
-
-    public static MemberDto fromEntity(Member entity) {
-        return new MemberDto(
-                entity.getId(),
-                entity.getRole(),
-                entity.getPassword(),
-                entity.getEmail(),
-                entity.getHp_no(),
-                entity.getCreated_dt(),
-                entity.getUpdated_dt(),
-                entity.getUse_yn()
-        );
-    }
 }

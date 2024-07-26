@@ -1,6 +1,7 @@
 package com.ticketpark.member.service;
 
 import com.ticketpark.exception.TicketParkException;
+import com.ticketpark.member.fixture.MemberFixture;
 import com.ticketpark.member.model.dto.MemberDto;
 import com.ticketpark.member.model.entity.Member;
 import com.ticketpark.member.model.entity.MemberStatus;
@@ -8,6 +9,7 @@ import com.ticketpark.member.model.entity.Role;
 import com.ticketpark.member.repository.MemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,18 +31,14 @@ public class MemberServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        //테스트 데이터 셋팅
-        dto = new MemberDto();
-        dto.setId("idTest2");
-        dto.setRole(Role.USER);
-        dto.setPassword("1q2w3e4r");
-        dto.setEmail("aa@aa.com");
-        dto.setHp_no("01012345678");
-        dto.setUse_yn(MemberStatus.USE);
+        dto = MemberFixture.getMemberDto();
+        //데이터 중복 제거
+        memberRepository.deleteMember(dto.getId());
     }
 
+    @DisplayName("회원가입 정상 동작")
     @Test
-    void 회원가입_정상_동작(){
+    void joinMember(){
         //when
         Member joinedMember = memberService.join(dto);
         Member searchedMember = memberRepository.findById(dto.getId()).orElseGet(Member::new);
@@ -48,18 +46,12 @@ public class MemberServiceTest {
         assertThat(joinedMember.getId()).isEqualTo(searchedMember.getId());
     }
 
+    @DisplayName("회원가입 시 아이디 중복되면 에러 발생")
     @Test
-    void 회원가입시_아이디중복되면_에러발생(){
+    void joinErrorByDuplicatedId(){
         //동일 아이디로 2번 가입 시 exception 발생
         Member join = memberService.join(dto);
         assertThrows(TicketParkException.class, () -> memberService.join(dto));
 
     }
-
-    @AfterEach
-    void afterEach() {
-        //기존 데이터 제거
-        memberRepository.deleteMember(dto.getId());
-    }
-
 }

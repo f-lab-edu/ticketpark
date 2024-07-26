@@ -36,7 +36,7 @@ public class RoleTypeHandler implements TypeHandler<Role> {
     }
 
     private Role getMemberRole(String roleKey) {
-        Role role = null;
+        Role role = Role.USER;
         switch (roleKey) {
             case "A" :
                 role = Role.ADMIN;

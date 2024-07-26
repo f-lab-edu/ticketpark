@@ -1,19 +1,13 @@
 package com.ticketpark.member.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ticketpark.member.controller.request.MemberJoinRequest;
 import com.ticketpark.member.fixture.MemberFixture;
 import com.ticketpark.member.model.entity.Member;
-import com.ticketpark.member.model.entity.MemberStatus;
-import com.ticketpark.member.model.entity.Role;
 import com.ticketpark.member.repository.MemberRepository;
 import com.ticketpark.member.service.MemberService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,18 +40,10 @@ public class MemberControllerTest {
 
     private MemberJoinRequest request;
 
-    @BeforeEach
-    void beforeEach() {
-        request = MemberFixture.getJoinRequest();
-    }
-
     @Test
     @DisplayName("회원가입 request 유효성 체크")
     void validateMemberJoinRequest() throws Exception {
-        request.setId("");
-        request.setPassword("");
-        request.setRole(null);
-        request.setEmail("abc@@.com");
+        request = MemberFixture.getEmptyRequiredInputJoinRequest();
 
         when(memberService.join(any())).thenReturn(mock(Member.class));
         mvc.perform(post("/api/member/join").contentType(MediaType.APPLICATION_JSON)
@@ -69,6 +55,8 @@ public class MemberControllerTest {
     @Test
     @DisplayName("회원가입")
     void joinMember() throws Exception {
+        request = MemberFixture.getJoinRequest();
+
         when(memberService.join(any())).thenReturn(mock(Member.class));
         mvc.perform(post("/api/member/join").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(request))).andDo(print())

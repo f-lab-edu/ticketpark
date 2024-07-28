@@ -17,11 +17,11 @@ public class PerformanceController {
 
     private final PerformanceService performanceService;
 
-    @PostMapping("/createPerformance")
-    public Response<Void> createPerformance(PerformanceCreateRequest requestList) {
+    @PostMapping
+    public Response<Void> create(PerformanceCreateRequest requestList) {
         //TODO 공연은 관리자만 등록 가능하므로 관리자 체크는 AOP로 뺄 것
         //공연 추가
-        performanceService.createPerformance(requestList);
+        performanceService.create(requestList);
         return Response.success();
     }
 }

@@ -1,20 +1,16 @@
 package com.ticketpark.ticket.model.entity;
 
-import com.ticketpark.performance.controller.request.PerformanceCreateRequest;
-import com.ticketpark.performance.model.dto.PerformerDto;
-import com.ticketpark.performance.model.entity.Performer;
 import com.ticketpark.ticket.model.dto.TicketGradeDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-public class Ticket_grade {
+public class TicketGrade {
     //pk
     private Long ticket_grade_id;
     //티켓 등급
@@ -30,11 +26,11 @@ public class Ticket_grade {
     //ticket 테이블 pk
     private Long ticket_id;
 
-    public static List<Ticket_grade> getPerformerList(Long ticketId, List<TicketGradeDto> gradeList){
-        List<Ticket_grade> list = new ArrayList<>();
+    public static List<TicketGrade> getPerformerList(Long ticketId, List<TicketGradeDto> gradeList){
+        List<TicketGrade> list = new ArrayList<>();
 
         for (TicketGradeDto dto : gradeList) {
-            Ticket_grade grade = new Ticket_grade();
+            TicketGrade grade = new TicketGrade();
             grade.setGrade(dto.getGrade());
             grade.setGrade_name(dto.getGrade_name());
             grade.setSeat_count(dto.getSeat_count());

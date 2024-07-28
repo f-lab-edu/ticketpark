@@ -1,24 +1,23 @@
 package com.ticketpark.performance.fixture;
 
+import com.ticketpark.common.TestConstants;
 import com.ticketpark.performance.model.dto.PerformanceDto;
 import com.ticketpark.performance.model.entity.Genre;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
 public class PerformanceFixture {
     public static PerformanceDto getPerformanceDto() {
+        LocalDateTime performanceStartTime = TestConstants.fixDate.plusDays(10);
+        LocalDateTime performanceEndTime = TestConstants.fixDate.plusDays(12);
 
-        LocalDateTime performanceStartTime = LocalDateTime.now().plusDays(10);
-        LocalDateTime performanceEndTime = LocalDateTime.now().plusDays(12);
-
-        PerformanceDto dto = new PerformanceDto();
-        dto.setGenre(Genre.CONCERT);
-        dto.setName("2024 SM 통합 콘서트");
-        dto.setPlace("고척돔");
-        dto.setStart_dt(performanceStartTime);
-        dto.setEnd_dt(performanceEndTime);
-        dto.setCreated_at(LocalDateTime.now());
-
-        return dto;
+        return PerformanceDto.builder()
+                .genre(Genre.CONCERT)
+                .name("2024 SM 통합 콘서트")
+                .place("고척돔")
+                .start_dt(performanceStartTime)
+                .end_dt(performanceEndTime)
+                .created_at(LocalDateTime.now())
+                .build();
     }
 }

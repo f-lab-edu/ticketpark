@@ -14,19 +14,4 @@ public class Performer {
     private Long performer_id;
     private String name;
     private Long performance_id;
-
-    public static List<Performer> getPerformerList(Long performanceId, PerformanceCreateRequest request){
-        List<Performer> list = new ArrayList<Performer>();
-        List<PerformerDto> requestList = request.getPerformer();
-
-        for (PerformerDto dto : requestList) {
-            Performer performer = new Performer();
-            performer.setName(dto.getName());
-            performer.setPerformance_id(performanceId);
-            list.add(performer);
-        }
-        return list;
-    }
-
-
 }

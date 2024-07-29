@@ -2,9 +2,11 @@ package com.ticketpark.performance.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ticketpark.common.CommonControllerTest;
 import com.ticketpark.member.model.entity.Member;
 import com.ticketpark.performance.controller.request.PerformanceCreateRequest;
 import com.ticketpark.performance.fixture.PerformanceFixture;
+import com.ticketpark.performance.fixture.PerformanceRequestFixture;
 import com.ticketpark.performance.fixture.PerformerFixture;
 import com.ticketpark.performance.model.dto.PerformanceDto;
 import com.ticketpark.performance.model.dto.PerformerDto;
@@ -38,37 +40,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PerformanceControllerTest{
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+public class PerformanceControllerTest extends CommonControllerTest {
 
     @MockBean
     private PerformanceService performanceService;
 
-    private PerformanceCreateRequest request;
-
-    @BeforeEach
-    public void setUp() throws Exception {
-        request = new PerformanceCreateRequest();
-        //공연
-        request.setPerformance(PerformanceFixture.getPerformanceDto());
-        //가수 정보
-        request.setPerformer(PerformerFixture.getPerformerDtoList());
-        //티켓
-        request.setTicket(TicketFixture.getTicketDto());
-        //좌석등급
-        request.setTicketGrade(TicketGradeFixture.getLitTicketGradeDto());
-    }
-
     @DisplayName("공연/티켓 정보 등록")
     @Test
     void createPerformance() throws Exception {
-        mvc.perform(post("/api/performance/createPerformance").contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsBytes(request))).andDo(print())
-                .andExpect(status().isOk());
+        PerformanceCreateRequest request = PerformanceRequestFixture.getPerformanceCreateRequest();
+        this.executeStatusOk("/api/performance", request);
     }
 }

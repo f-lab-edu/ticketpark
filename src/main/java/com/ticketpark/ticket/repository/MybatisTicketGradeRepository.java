@@ -1,6 +1,6 @@
 package com.ticketpark.ticket.repository;
 
-import com.ticketpark.ticket.model.entity.Ticket_grade;
+import com.ticketpark.ticket.model.entity.TicketGrade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ public class MybatisTicketGradeRepository implements TicketGradeRepository{
     private final TicketGradeMapper ticketGradeMapper;
 
     @Override
-    public void createTicketGrade(List<Ticket_grade> ticketGradeList) {
+    public void createTicketGrade(List<TicketGrade> ticketGradeList) {
         ticketGradeMapper.createTicketGrade(ticketGradeList);
     }
 }

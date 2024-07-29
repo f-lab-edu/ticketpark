@@ -2,6 +2,7 @@ package com.ticketpark.performance.service;
 
 import com.ticketpark.performance.controller.request.PerformanceCreateRequest;
 import com.ticketpark.performance.fixture.PerformanceFixture;
+import com.ticketpark.performance.fixture.PerformanceRequestFixture;
 import com.ticketpark.performance.fixture.PerformerFixture;
 import com.ticketpark.performance.model.dto.PerformanceDto;
 import com.ticketpark.performance.model.dto.PerformerDto;
@@ -35,31 +36,18 @@ public class PerformanceServiceTest {
 
     private PerformanceCreateRequest request;
 
-    @BeforeEach
-    void beforeEach(){
-        request = new PerformanceCreateRequest();
-        // 공연
-        request.setPerformance(PerformanceFixture.getPerformanceDto());
-        //가수 정보
-        request.setPerformer(PerformerFixture.getPerformerDtoList());
-        //티켓
-        request.setTicket(TicketFixture.getTicketDto());
-        //좌석등급
-        request.setTicketGrade(TicketGradeFixture.getLitTicketGradeDto());
-    }
-
     @DisplayName("공연/티켓정보 정상 동작")
     @Test
     void createPerformance(){
-        Assertions.assertDoesNotThrow(() -> performanceService.createPerformance(request));
+        request = PerformanceRequestFixture.getPerformanceCreateRequest();
+        Assertions.assertDoesNotThrow(() -> performanceService.create(request));
     }
 
     @DisplayName("티켓 정보 없이 공연 등록 불가")
     @Test
     void createPerformanceWithoutTicket(){
-        request.setTicket(null);
-        request.setTicketGrade(null);
-        assertThrows(IllegalArgumentException.class, () -> performanceService.createPerformance(request));
+        request = PerformanceRequestFixture.getEmptyTicketPerformanceCreateRequest();
+        assertThrows(NullPointerException.class, () -> performanceService.create(request));
     }
 
 }

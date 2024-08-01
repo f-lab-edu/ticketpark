@@ -5,6 +5,7 @@ import com.ticketpark.performance.controller.request.PerformanceCreateRequest;
 import com.ticketpark.performance.service.PerformanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class PerformanceController {
     private final PerformanceService performanceService;
 
     @PostMapping
-    public Response<Void> create(PerformanceCreateRequest requestList) {
+    public Response<Void> create(@RequestBody PerformanceCreateRequest requestList) {
         //TODO 공연은 관리자만 등록 가능하므로 관리자 체크는 AOP로 뺄 것
         //공연 추가
         performanceService.create(requestList);

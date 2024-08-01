@@ -61,6 +61,6 @@ CREATE TABLE `ticket_order` (
                                 `member_id`         bigint        NOT NULL    COMMENT '회원 ID',
                                 `performance_id`    bigint        NOT NULL    COMMENT '공연 ID',
                                 `ticket_grade_id`   bigint        NOT NULL    COMMENT '티켓 등급 ID',
-                                `seat_number`       INT           NOT NULL    COMMENT '좌석번호',
+                                `seat_info`         varchar(50)   NOT NULL    COMMENT '좌석정보',
                                 `created_dt`	    timestamp     NULL DEFAULT NOW() COMMENT '티켓 생성일시'
 );

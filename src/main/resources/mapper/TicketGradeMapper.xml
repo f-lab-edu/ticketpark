@@ -16,4 +16,21 @@
             )
         </foreach>
     </insert>
+
+    <delete id="deleteMember" parameterType="String">
+        delete from member where id = #{id}
+    </delete>
+
+    <select id="getCountTicketGrade" parameterType="Long">
+        select
+            seat_count
+        from ticket_grade
+        where ticket_grade_id = #{ticket_grade_id}
+    </select>
+
+    <update id="updateSeatCount">
+        update ticket_grade
+            set seat_count = seat_count-1
+        where ticket_grade_id = #{ticket_grade_id}
+    </update>
 </mapper>

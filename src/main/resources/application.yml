@@ -12,3 +12,10 @@ logging:
     com:
       ticketpark:
         mybatis: trace
+    org:
+      springframework:
+        transaction:
+          interceptor : trace
+        jdbc:
+          datasource:
+            DataSourceTransactionManager : debug

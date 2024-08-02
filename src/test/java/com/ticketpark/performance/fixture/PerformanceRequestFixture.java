@@ -1,8 +1,8 @@
 package com.ticketpark.performance.fixture;
 
 import com.ticketpark.performance.controller.request.PerformanceCreateRequest;
-import com.ticketpark.ticket.service.fixture.TicketFixture;
-import com.ticketpark.ticket.service.fixture.TicketGradeFixture;
+import com.ticketpark.ticket.fixture.TicketFixture;
+import com.ticketpark.ticket.fixture.TicketGradeFixture;
 
 public class PerformanceRequestFixture {
     public static PerformanceCreateRequest getPerformanceCreateRequest() {

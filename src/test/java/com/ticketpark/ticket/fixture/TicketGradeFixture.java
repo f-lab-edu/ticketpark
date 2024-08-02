@@ -1,9 +1,8 @@
-package com.ticketpark.ticket.service.fixture;
+package com.ticketpark.ticket.fixture;
 
 import com.ticketpark.ticket.model.dto.TicketGradeDto;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

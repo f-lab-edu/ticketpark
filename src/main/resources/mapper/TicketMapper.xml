@@ -5,6 +5,10 @@
 <mapper namespace="com.ticketpark.ticket.repository.TicketMapper">
     <insert id = "createTicket" useGeneratedKeys="true" keyColumn="ticket_id" keyProperty="ticket_id" >
         insert into ticket (start_dt, end_dt, created_dt, performance_id)
-        values(#{ticket.start_dt}, #{ticket.end_dt}, #{ticket.created_dt}, #{ticket.performance_id})
+        values(
+               #{ticket.start_dt}
+              , #{ticket.end_dt}
+              , #{ticket.created_dt}
+              , #{ticket.performance_id})
     </insert>
 </mapper>

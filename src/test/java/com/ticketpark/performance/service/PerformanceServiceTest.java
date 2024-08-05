@@ -25,7 +25,7 @@ public class PerformanceServiceTest {
     @Test
     void createPerformance(){
         request = PerformanceRequestFixture.getPerformanceCreateRequest();
-        Assertions.assertDoesNotThrow(() -> performanceService.create(request));
+        assertDoesNotThrow(() -> performanceService.create(request));
     }
 
     @DisplayName("티켓 정보 없이 공연 등록 불가")

@@ -18,7 +18,12 @@ public class MyBatisTicketOrderRepository implements TicketOrderRepository {
     }
 
     @Override
-    public Optional<TicketOrder> getTickOrderBySeatInfo(Long performance_id, Long ticket_grade_id, String seat_info) {
-        return ticketOrderMapper.getTickOrderBySeatInfo(performance_id, ticket_grade_id, seat_info);
+    public Optional<TicketOrder> getTickOrderBySeatInfo(Long performanceId, Long ticketGradeId, String seatInfo) {
+        return ticketOrderMapper.getTickOrderBySeatInfo(performanceId, ticketGradeId, seatInfo);
+    }
+
+    @Override
+    public Optional<TicketOrder> getTickOrder(Long ticketOrderId) {
+        return ticketOrderMapper.getTickOrder(ticketOrderId);
     }
 }

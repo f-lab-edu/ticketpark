@@ -18,12 +18,12 @@ public class MybatisTicketGradeRepository implements TicketGradeRepository{
     }
 
     @Override
-    public Integer getCountTicketGrade(Long ticket_grade_id) {
-        return ticketGradeMapper.getCountTicketGrade(ticket_grade_id);
+    public Integer getCountTicketGrade(Long ticketGradeId) {
+        return ticketGradeMapper.getCountTicketGrade(ticketGradeId);
     }
 
     @Override
-    public Integer updateSeatCount(Long ticket_grade_id) {
-        return ticketGradeMapper.updateSeatCount(ticket_grade_id);
+    public Integer updateSeatCount(Long ticketGradeId) {
+        return ticketGradeMapper.updateSeatCount(ticketGradeId);
     }
 }

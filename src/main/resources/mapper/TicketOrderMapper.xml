@@ -23,8 +23,20 @@
             ,seat_info
             ,created_dt
         from ticket_order
-        where performance_id = #{performance_id}
-            and ticket_grade_id = #{ticket_grade_id}
-            and seat_info = #{seat_info}
+        where performance_id = #{performanceId}
+            and ticket_grade_id = #{ticketGradeId}
+            and seat_info = #{seatInfo}
+    </select>
+
+    <select id="getTickOrder" resultType="com.ticketpark.ticket.model.entity.TicketOrder">
+        select
+            ticket_order_id
+             ,member_id
+             ,performance_id
+             ,ticket_grade_id
+             ,seat_info
+             ,created_dt
+        from ticket_order
+        where ticket_order_id = #{ticket_order_id}
     </select>
 </mapper>

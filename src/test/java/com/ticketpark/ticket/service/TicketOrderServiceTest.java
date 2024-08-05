@@ -42,7 +42,7 @@ public class TicketOrderServiceTest {
 
     @DisplayName("이미 예약된 좌석을 예매하면 예매 불가능")
     @Test
-    void bookTicketNotPossible(){
+    void duplicateBookTicket(){
         //given
         ticketOrderDto = TicketOrderFixture.getTicketOrderDto("1층-A구역-1열-001");
 

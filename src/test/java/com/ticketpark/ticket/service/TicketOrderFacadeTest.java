@@ -1,36 +1,42 @@
 package com.ticketpark.ticket.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ticketpark.ticket.model.dto.TicketOrderDto;
 import com.ticketpark.ticket.fixture.TicketOrderFixture;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.ticketpark.ticket.repository.TicketOrderRepository;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Transactional
 @SpringBootTest
 public class TicketOrderFacadeTest {
 
     @Autowired
+    TicketOrderRepository ticketOrderRepository;
+
+    @Autowired
     TicketOrderFacade ticketOrderFacade;
 
-    TicketOrderDto ticketOrderDto;
+    TicketOrderDto request;
 
     @BeforeEach
     void setUp() {
-        this.ticketOrderDto = TicketOrderFixture.getTicketOrderDto();
+        this.request = TicketOrderFixture.getTicketOrderDto();
     }
 
 
-    @DisplayName("티켓 1매 예약")
+    @DisplayName("티켓 1매 정상 예약")
     @Test
-    void bookOneTicket() throws JsonProcessingException {
-        Assertions.assertDoesNotThrow(()->ticketOrderFacade.orderTicket(this.ticketOrderDto));
+    void bookOneTicket()  {
+        //when
+        ticketOrderFacade.orderTicket(this.request);
+
+        //then
+        assertThat(ticketOrderRepository.getTickOrder(request.getTicket_grade_id()).get()).isNotNull();
     }
 
 }

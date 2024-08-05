@@ -28,6 +28,14 @@
         where ticket_grade_id = #{ticket_grade_id}
     </select>
 
+    <select id="getCountTicketGradeByPessimisticLock" parameterType="Long">
+        select
+            seat_count
+        from ticket_grade
+        where ticket_grade_id = #{ticket_grade_id}
+        for update
+    </select>
+
     <update id="updateSeatCount">
         update ticket_grade
             set seat_count = seat_count-1

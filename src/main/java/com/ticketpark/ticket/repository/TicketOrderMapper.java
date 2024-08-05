@@ -10,8 +10,10 @@ import java.util.Optional;
 public interface TicketOrderMapper {
     void createTicketOrder(@Param("ticketOrder") TicketOrder ticketOrder);
     Optional<TicketOrder> getTickOrderBySeatInfo(
-             Long performance_id
-            , Long ticket_grade_id
-            ,  String seat_info);
+             Long performanceId
+            , Long ticketGradeId
+            ,  String seatInfo);
+
+    Optional<TicketOrder> getTickOrder(Long ticketOrderId);
 
 }

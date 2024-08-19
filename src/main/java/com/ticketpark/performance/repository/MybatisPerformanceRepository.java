@@ -15,4 +15,14 @@ public class MybatisPerformanceRepository implements PerformanceRepository {
     public void createPerformance(Performance performance) {
         performanceMapper.createPerformance(performance);
     }
+
+    @Override
+    public int deletePerformance(Long performanceId) {
+        return performanceMapper.deletePerformance(performanceId);
+    }
+
+    @Override
+    public void deleteAllPerformance() {
+        performanceMapper.deleteAllPerformance();
+    }
 }

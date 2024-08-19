@@ -18,12 +18,12 @@ public class TicketOrderFixture {
                 .build();
     }
 
-    public static TicketOrderDto getTicketOrderDto(String seat_info) {
+    public static TicketOrderDto getTicketOrderDto(String seatInfo) {
         return TicketOrderDto.builder()
                 .member_id(TestConstants.defaultMemberId)
                 .performance_id(TestConstants.defaultPerformanceId)
                 .ticket_grade_id(TestConstants.defaultTicketGradeId)
-                .seat_info(seat_info)
+                .seat_info(seatInfo)
                 .created_dt(LocalDateTime.now())
                 .build();
     }

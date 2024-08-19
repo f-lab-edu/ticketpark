@@ -10,9 +10,9 @@ public class TicketGradeFixture {
 
     public static List<TicketGradeDto> getLitTicketGradeDto() {
         return Arrays.asList(
-                new TicketGradeDto("VIP", "VIP석", 200, 200000.0, LocalDateTime.now())
-                ,new TicketGradeDto("R", "R석", 200, 170000.0, LocalDateTime.now())
-                ,new TicketGradeDto("S", "S석", 200, 150000.0, LocalDateTime.now())
+                new TicketGradeDto("VIP", "VIP석", 100, 200000.0, LocalDateTime.now())
+                ,new TicketGradeDto("R", "R석", 100, 170000.0, LocalDateTime.now())
+                ,new TicketGradeDto("S", "S석", 100, 150000.0, LocalDateTime.now())
         );
     }
 }

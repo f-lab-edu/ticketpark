@@ -3,6 +3,7 @@ package com.ticketpark.ticket.service;
 import com.ticketpark.ticket.model.dto.TicketOrderDto;
 import com.ticketpark.ticket.fixture.TicketOrderFixture;
 
+import com.ticketpark.ticket.model.entity.TicketOrder;
 import com.ticketpark.ticket.repository.TicketOrderRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TicketOrderFacadeTest {
 
     @BeforeEach
     void setUp() {
-        this.request = TicketOrderFixture.getTicketOrderDto();
+        request = TicketOrderFixture.getTicketOrderDto();
     }
 
 
@@ -33,10 +34,10 @@ public class TicketOrderFacadeTest {
     @Test
     void bookOneTicket()  {
         //when
-        ticketOrderFacade.orderTicket(this.request);
+        TicketOrder insertTicketOrder =ticketOrderFacade.orderTicket(request);
 
         //then
-        assertThat(ticketOrderRepository.getTickOrder(request.getTicket_grade_id()).get()).isNotNull();
+        TicketOrder getTicketOrder = ticketOrderRepository.getTickOrder(insertTicketOrder.getTicket_order_id()).get();
+        assertThat(insertTicketOrder).usingRecursiveComparison().isEqualTo(getTicketOrder);
     }
-
 }

@@ -28,6 +28,21 @@
             and seat_info = #{seatInfo}
     </select>
 
+    <select id="getTickOrderBySeatInfoAndPessimisticLock" resultType="com.ticketpark.ticket.model.entity.TicketOrder">
+        select
+            ticket_order_id
+             ,member_id
+             ,performance_id
+             ,ticket_grade_id
+             ,seat_info
+             ,created_dt
+        from ticket_order
+        where performance_id = #{performanceId}
+          and ticket_grade_id = #{ticketGradeId}
+          and seat_info = #{seatInfo}
+            for update
+    </select>
+
     <select id="getTickOrder" resultType="com.ticketpark.ticket.model.entity.TicketOrder">
         select
             ticket_order_id
@@ -37,6 +52,10 @@
              ,seat_info
              ,created_dt
         from ticket_order
-        where ticket_order_id = #{ticket_order_id}
+        where ticket_order_id = #{ticketOrderId}
     </select>
+
+    <delete id="deleteAllTicketOrder">
+        truncate table ticket_order
+    </delete>
 </mapper>

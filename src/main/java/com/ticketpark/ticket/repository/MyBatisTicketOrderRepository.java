@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+//@Repository
 @RequiredArgsConstructor
 public class MyBatisTicketOrderRepository implements TicketOrderRepository {
 
@@ -23,7 +23,19 @@ public class MyBatisTicketOrderRepository implements TicketOrderRepository {
     }
 
     @Override
+    public Optional<TicketOrder> getTickOrderBySeatInfoAndPessimisticLock(Long performanceId, Long ticketGradeId, String seatInfo) {
+        return ticketOrderMapper.getTickOrderBySeatInfoAndPessimisticLock(performanceId, ticketGradeId, seatInfo);
+    }
+
+    @Override
     public Optional<TicketOrder> getTickOrder(Long ticketOrderId) {
         return ticketOrderMapper.getTickOrder(ticketOrderId);
     }
+
+    @Override
+    public void deleteAllTicketOrder() {
+        ticketOrderMapper.deleteAllTicketOrder();
+    }
+
+
 }

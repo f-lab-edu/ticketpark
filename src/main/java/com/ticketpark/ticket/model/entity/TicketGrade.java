@@ -1,6 +1,7 @@
 package com.ticketpark.ticket.model.entity;
 
 import com.ticketpark.ticket.model.dto.TicketGradeDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
+@AllArgsConstructor
 public class TicketGrade {
     //pk
     private Long ticket_grade_id;
@@ -25,20 +26,30 @@ public class TicketGrade {
     private LocalDateTime created_dt;
     //ticket 테이블 pk
     private Long ticket_id;
+    //낙관적 락 구현 위한 version
+    private Long version;
+
+    public TicketGrade(String grade, String grade_name, Integer seat_count, Double price, LocalDateTime created_dt, Long ticket_id){
+        this.grade = grade;
+        this.grade_name = grade_name;
+        this.seat_count = seat_count;
+        this.price = price;
+        this.created_dt = created_dt;
+        this.ticket_id = ticket_id;
+    }
 
     public static List<TicketGrade> getPerformerList(Long ticketId, List<TicketGradeDto> gradeList){
         List<TicketGrade> list = new ArrayList<>();
 
         for (TicketGradeDto dto : gradeList) {
-            TicketGrade grade = new TicketGrade();
-            grade.setGrade(dto.getGrade());
-            grade.setGrade_name(dto.getGrade_name());
-            grade.setSeat_count(dto.getSeat_count());
-            grade.setPrice(dto.getPrice());
-            grade.setCreated_dt(LocalDateTime.now());
-            grade.setTicket_id(ticketId);
-
-            list.add(grade);
+            list.add(new TicketGrade(
+                    dto.getGrade()
+                    , dto.getGrade_name()
+                    , dto.getSeat_count()
+                    , dto.getPrice()
+                    , LocalDateTime.now()
+                    , ticketId
+            ));
         }
         return list;
     }

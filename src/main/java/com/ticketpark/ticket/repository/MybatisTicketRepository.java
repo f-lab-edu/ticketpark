@@ -14,4 +14,9 @@ public class MybatisTicketRepository implements TicketRepository{
     public void createTicket(Ticket ticket) {
         ticketMapper.createTicket(ticket);
     }
+
+    @Override
+    public void deleteAllTicket() {
+        ticketMapper.deleteAllTicket();
+    }
 }

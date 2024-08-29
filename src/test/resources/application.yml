@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     username: sa
-    url: jdbc:h2:mem:test;MODE=MariaDB;
+    url: jdbc:h2:mem:test;MODE=MariaDB;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
     password:
   sql:
     init:
@@ -10,6 +10,8 @@ spring:
   h2:
     console:
       enabled: true
+  profiles:
+    active: test
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
@@ -20,4 +22,7 @@ logging:
     com:
       ticketpark:
         mybatis: trace
+retry:
+  optimisticLock:
+    count : 5
 

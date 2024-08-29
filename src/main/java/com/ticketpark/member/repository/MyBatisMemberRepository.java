@@ -25,4 +25,9 @@ public class MyBatisMemberRepository implements MemberRepository {
     public int deleteMember(String id) {
         return memberMapper.deleteMember(id);
     }
+
+    @Override
+    public void deleteAllMember() {
+        memberMapper.deleteAllMember();
+    }
 }

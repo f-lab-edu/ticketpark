@@ -7,5 +7,6 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface TicketMapper {
     void createTicket(@Param("ticket") Ticket ticket);
+    void deleteAllTicket();
 }
 

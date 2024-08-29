@@ -16,4 +16,52 @@
             )
         </foreach>
     </insert>
+
+    <select id="getCountTicketGrade" parameterType="Long">
+        select
+            seat_count
+        from ticket_grade
+        where ticket_grade_id = #{ticketGradeId}
+    </select>
+
+    <select id="getTicketGrade" resultType="com.ticketpark.ticket.model.entity.TicketGrade">
+        select
+            ticket_grade_id
+            , grade
+            , grade_name
+            , seat_count
+            , price
+            , created_dt
+            , ticket_id
+            , version
+        from ticket_grade
+        where ticket_grade_id = #{ticketGradeId}
+    </select>
+
+    <select id="getCountTicketByGradeByPessimisticLock" parameterType="Long">
+        select
+            seat_count
+        from ticket_grade
+        where ticket_grade_id = #{ticketGradeId}
+        for update
+    </select>
+
+    <update id="updateSeatCount">
+        update ticket_grade
+        set seat_count = seat_count - 1
+        where ticket_grade_id = #{ticketGradeId}
+    </update>
+
+    <update id="updateSeatCountByByOptimisticLock">
+        update ticket_grade
+        set seat_count = seat_count - 1
+            , version = version + 1
+        where ticket_grade_id = #{ticketGradeId}
+          and version = #{version}
+    </update>
+
+    <delete id="deleteAllTicketGrade">
+        truncate table ticket_grade
+    </delete>
+
 </mapper>

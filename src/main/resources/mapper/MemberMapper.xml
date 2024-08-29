@@ -5,18 +5,38 @@
 <mapper namespace="com.ticketpark.member.repository.MemberMapper">
 
     <select id="findById" resultType="com.ticketpark.member.model.entity.Member">
-        select member_id, id, role, email, hp_no, created_dt, updated_dt, use_yn
+        select
+            member_id
+             , id
+             , role
+             , email
+             , hp_no
+             , created_dt
+             , updated_dt
+             , use_yn
         from member
-        where id = #{id} and use_yn = 'Y'
+        where id = #{id}
+          and use_yn = 'Y'
     </select>
 
     <insert id = "addMember" useGeneratedKeys="true" keyColumn="member_id" keyProperty="member_id" >
         insert into member (id, role, password, email, hp_no, created_dt)
-        values (#{member.id}, #{member.role}, #{member.password}, #{member.email}, #{member.hp_no}, #{member.created_dt})
+        values (
+                #{member.id}
+               , #{member.role}
+               , #{member.password}
+               , #{member.email}
+               , #{member.hp_no}
+               , #{member.created_dt}
+               )
     </insert>
 
     <delete id="deleteMember" parameterType="String">
         delete from member where id = #{id}
+    </delete>
+
+    <delete id="deleteAllMember">
+        truncate table member
     </delete>
 
 

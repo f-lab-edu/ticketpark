@@ -14,11 +14,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@Transactional
 public class MemberServiceTest {
 
     @Autowired
@@ -32,8 +34,6 @@ public class MemberServiceTest {
     @BeforeEach
     void beforeEach() {
         dto = MemberFixture.getMemberDto();
-        //데이터 중복 제거
-        memberRepository.deleteMember(dto.getId());
     }
 
     @DisplayName("회원가입 정상 동작")

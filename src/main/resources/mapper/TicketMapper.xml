@@ -11,4 +11,8 @@
               , #{ticket.created_dt}
               , #{ticket.performance_id})
     </insert>
+
+    <delete id="deleteAllTicket">
+        truncate table ticket
+    </delete>
 </mapper>

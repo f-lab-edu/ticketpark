@@ -16,4 +16,9 @@ public class MybatisPerformerRepository implements PerformerRepository{
     public void createPerformer(List<Performer> performers) {
         performerMapper.createPerformer(performers);
     }
+
+    @Override
+    public void deleteAllPerformer() {
+        performerMapper.deleteAllPerformer();
+    }
 }

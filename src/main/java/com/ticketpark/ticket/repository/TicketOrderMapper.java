@@ -14,6 +14,14 @@ public interface TicketOrderMapper {
             , Long ticketGradeId
             ,  String seatInfo);
 
+    Optional<TicketOrder> getTickOrderBySeatInfoAndPessimisticLock(
+            Long performanceId
+            , Long ticketGradeId
+            ,  String seatInfo);
+
     Optional<TicketOrder> getTickOrder(Long ticketOrderId);
+
+
+    void deleteAllTicketOrder();
 
 }

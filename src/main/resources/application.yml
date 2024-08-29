@@ -19,3 +19,9 @@ logging:
         jdbc:
           datasource:
             DataSourceTransactionManager : debug
+retry:
+  optimisticLock:
+    count: 5
+
+
+

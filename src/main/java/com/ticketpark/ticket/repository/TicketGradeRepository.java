@@ -8,5 +8,13 @@ public interface TicketGradeRepository {
 
     Integer getCountTicketGrade(Long ticketGradeId);
 
+    Integer getCountTicketByGradeByPessimisticLock(Long ticketGradeId);
+
+    TicketGrade getTicketGrade(Long ticketGradeId);
+
     Integer updateSeatCount(Long ticketGradeId);
+
+    Integer updateSeatCountByByOptimisticLock(Long ticketGradeId, Long version);
+
+    void deleteAllTicketGrade();
 }

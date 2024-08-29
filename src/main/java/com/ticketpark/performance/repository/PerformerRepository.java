@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PerformerRepository {
     void createPerformer(List<Performer> performers);
+    void deleteAllPerformer();
 }

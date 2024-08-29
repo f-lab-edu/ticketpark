@@ -7,4 +7,8 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface PerformanceMapper {
     void createPerformance(@Param("performance") Performance performance);
+
+    int deletePerformance(Long performanceId);
+
+    void deleteAllPerformance();
 }

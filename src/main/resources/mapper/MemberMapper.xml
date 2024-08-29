@@ -35,5 +35,9 @@
         delete from member where id = #{id}
     </delete>
 
+    <delete id="deleteAllMember">
+        truncate table member
+    </delete>
+
 
 </mapper>

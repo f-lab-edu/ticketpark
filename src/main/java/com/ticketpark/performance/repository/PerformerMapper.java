@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface PerformerMapper {
     void createPerformer(List<Performer> performers);
+    Long deletePerfomerByPerformanceId(Long performanceId);
+    void deleteAllPerformer();
 }

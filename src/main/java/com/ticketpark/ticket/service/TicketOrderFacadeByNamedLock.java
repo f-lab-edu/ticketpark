@@ -1,6 +1,7 @@
 package com.ticketpark.ticket.service;
 
-import com.ticketpark.common.repository.NameLockRepository;
+import com.ticketpark.common.util.NamedLockTemplate;
+import com.ticketpark.common.util.TransactionExecutor;
 import com.ticketpark.ticket.model.dto.TicketOrderDto;
 import com.ticketpark.ticket.model.entity.TicketOrder;
 import lombok.RequiredArgsConstructor;
@@ -9,26 +10,25 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TicketOrderFacadeByNamedLock implements TicketOrderFacade {
 
-    private final NameLockRepository nameLockRepository;
-    private final TicketGradeService ticketGradeService;
-    private final TicketOrderService ticketOrderService;
+    private final NamedLockTemplate namedLockTemplate;
+    private final TicketOrderValidator ticketOrderValidator;
+    private final TransactionExecutor transactionExecutor;
+    private final LockingTicketOrderService defaultTicketOrderService;
 
     @Transactional
     public TicketOrder orderTicket(TicketOrderDto orderDto){
-        TicketOrder orderResult;
-        try{
-            nameLockRepository.getLock("ticket_order", 300);
-            ticketGradeService.isFullBooked(orderDto);
-            ticketOrderService.checkBookableTicket(orderDto);
-            orderResult = saveTicketOrder(orderDto);
-        }finally {
-            nameLockRepository.releaseLock("ticket_order");
-        }
-        return orderResult;
-    }
+        TicketOrder orderResult = null;
 
-    private TicketOrder saveTicketOrder(TicketOrderDto orderDto){
-        return ticketOrderService.saveTicketOrder(orderDto);
+        namedLockTemplate.execute("ticket_order", 300, () -> {
+            ticketOrderValidator.validate(orderDto);
+            //TODO 람다 캡처링 오류 해결해야 함
+            transactionExecutor.executeWithRequireNew(() -> {
+                return defaultTicketOrderService.defaultSaveTicketOrder(orderDto);
+            });
+        });
+
+        //람다 캡쳐링으로 인해서 티켓 예매 response 리턴 안되어서 일단 NULL 리턴
+        return orderResult;
     }
 
 }

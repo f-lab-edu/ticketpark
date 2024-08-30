@@ -1,9 +1,9 @@
 package com.ticketpark.configuration;
 
-import com.ticketpark.common.repository.MariaDBNamedLockRepository;
-import com.ticketpark.common.repository.NameLockRepository;
-import com.ticketpark.common.repository.NamedLockMapper;
-import com.ticketpark.ticket.repository.*;
+import com.ticketpark.common.enums.LockType;
+import com.ticketpark.common.util.TransactionExecutor;
+import com.ticketpark.ticket.repository.TicketGradeRepository;
+import com.ticketpark.ticket.repository.TicketOrderRepository;
 import com.ticketpark.ticket.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,48 +15,29 @@ import org.springframework.context.annotation.Configuration;
 public class ConcurrencyControlConfig {
 
     @Autowired
-    private final TicketGradeMapper ticketGradeMapper;
+    private final TicketOrderValidator ticketOrderValidator;
 
     @Autowired
-    private final TicketOrderMapper ticketOrderMapper;
+    private final TransactionExecutor transactionExecutor;
 
     @Autowired
-    private final NamedLockMapper nameLockMapper;
+    private final LockingTicketOrderService defaultTicketOrderService;
+
+    @Autowired
+    private final TicketGradeRepository ticketGradeRepository;
+
+    @Autowired
+    private final TicketOrderRepository ticketOrderRepository;
 
     @Bean
     public TicketOrderFacade ticketOrderFacade(){
-        return new TicketOrderFacadeByPessimisticLock(ticketGradeService(), ticketOrderService());
-        //return new TicketOrderFacadeByOptimisticLock(ticketGradeService(), ticketOrderService());
-        //return new TicketOrderFacadeByNamedLock(nameLockRepository(), ticketGradeService(), ticketOrderService());
+        return new TicketOrderFacadeByPessimisticLock(ticketOrderValidator, transactionExecutor, defaultTicketOrderService);
+        //return new TicketOrderFacadeByOptimisticLock(ticketOrderValidator, defaultTicketOrderService);
+        //return new TicketOrderFacadeByNamedLock(namedLockTemplate, ticketOrderValidator, transactionExecutor, defaultTicketOrderService);
     }
 
     @Bean
-    public TicketGradeService ticketGradeService(){
-        return new TicketGradeServiceByPessimisticLock(ticketGradeRepository());
-        //return new TicketGradeServiceByOptimisticLock(ticketGradeRepository());
-        //return new TicketGradeServiceByNamedLock(ticketGradeRepository());
+    public TicketValidationService ticketValidationService(){
+        return new TicketValidationService(LockType.PessimisticLock, ticketGradeRepository, ticketOrderRepository);
     }
-
-    @Bean
-    public TicketOrderService ticketOrderService(){
-        return new TicketOrderServiceByPessimisticLock(ticketOrderRepository(), ticketGradeRepository());
-        //return new TicketOrderServiceByOptimisticLock(ticketOrderRepository(), ticketGradeRepository());
-        //return new TicketOrderServiceByNamedLock(ticketOrderRepository(), ticketGradeRepository());
-    }
-
-    @Bean
-    public NameLockRepository nameLockRepository(){
-        return new MariaDBNamedLockRepository(nameLockMapper);
-    }
-
-    @Bean
-    public TicketGradeRepository ticketGradeRepository(){
-        return new MybatisTicketGradeRepository(ticketGradeMapper);
-    }
-
-    @Bean
-    public TicketOrderRepository ticketOrderRepository(){
-        return new MyBatisTicketOrderRepository(ticketOrderMapper);
-    }
-
 }

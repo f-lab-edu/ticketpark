@@ -21,9 +21,9 @@ public class OptimisticLockRetryAspect {
         RuntimeException exceptionHolder = null;
         int maxRetry = retryCount > 0 ? retryCount : retry.value();
 
-        for (int retryCount = 1; retryCount <= maxRetry; retryCount++) {
+        for (int retryIndex = 1; retryIndex <= maxRetry; retryIndex++) {
             try {
-                log.debug("[retry] try count {}/{}", retryCount, maxRetry);
+                log.debug("[retry] try count {}/{}", retryIndex, maxRetry);
                 return joinPoint.proceed();
             } catch (OptimisticLockingFailureException e) {
                 log.debug("버전 충돌 발생 / 예매 retry start {}", joinPoint.getArgs());
